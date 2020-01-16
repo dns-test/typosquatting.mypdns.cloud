@@ -14,32 +14,10 @@
 # Database functions
 # ******************
 
-MySqlImport () {
-	printf "\nMySql import...\n"
-	sudo mysql -u root -h localhost -e "CREATE DATABASE pyfunceble DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-	sudo mysql -u root -h localhost -e "CREATE USER 'root'@'%' IDENTIFIED BY ''"
-	sudo mysql -u root -h localhost -e "CREATE USER 'pyfunceble'@'localhost' IDENTIFIED BY 'pyfunceble';"
-	sudo mysql -u root -h localhost -e "GRANT ALL PRIVILEGES ON pyfunceble.* TO 'pyfunceble'@'localhost';"
-	if [ -f "${HOME}/db/pyfunceble.sql" ]
-	then
-		sudo mysql --user=pyfunceble --password=pyfunceble pyfunceble < "${HOME}/db/pyfunceble.sql"
-	fi
-	
-	printf "\nMySql Import DONE!\n"
 
-	exit ${?}
-}
 MySqlImport
 
-MySqlExport () {
-	printf "\nMysql Export...\n"
-	if [ ! -d "${HOME}/db/" ]
-	then
-		sudo mkdir -p ${HOME}/db/
-	fi
-	sudo mysqldump --user=pyfunceble --password=pyfunceble --opt pyfunceble > ${HOME}/db/pyfunceble.sql
-	printf "\nMySql Export done...\n"
-}
+
 
 # **********************
 # Setting date variables
@@ -64,14 +42,14 @@ fi
 # ***************
 printf "\nAXFR Importing\n"
 
-AXFRImport () {
+#AXFRImport () {
 	truncate -s 0 "${testfile}"
 	
     dig axfr typosquatting.mypdns.cloud @axfr.ipv4.mypdns.cloud -p 5353 grep -vE "(^(\*\.|$))|[SOA]" sed 's/\.rpz\.mypdns\.cloud.*$//;s/^\s*\(.*[^ \t]\)\(\s\+\)*$/\1/' > "${testfile}"
 
 	printf "\nAXFR Importing... DONE!\n"
 	exit ${?}
- }
+#}
 AXFRImport
 
 #ImportWhiteList () {
@@ -83,7 +61,7 @@ AXFRImport
 #ImportWhiteList
 
 #WhiteListing () {
-    #if [[ "$(git log -1 | tail -1 | xargs)" =~ "skip ci | ci skip" ]]
+    #if [[ "$(git log -1 | tail -1 | xargs)" =~ "ci skip" ]]
         #then
 			#printf "\nRunning whitelist\n"
             #hash uhb_whitelist

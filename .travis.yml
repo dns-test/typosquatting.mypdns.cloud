@@ -3,11 +3,10 @@ dist: bionic
 language: python
 
 python:
-  #- "3.6"
-  #- "3.7"
+  - "3.7"
   - "3.8"
-  - "3.8-dev"
-  - "3.9-dev"
+  #- "3.8-dev"
+  #- "3.9-dev"
 
 cache:
   pip: true
@@ -24,15 +23,12 @@ env:
     - GIT_NAME: "Spirillen"
     - GIT_EMAIL: 44526987+spirillen@users.noreply.github.com
     - TRAVIS_REPO_SLUG: dns-test/typosquatting.mypdns.cloud
-    - GIT_BRANCH: master
+    #- GIT_BRANCH: master
     - TZ: Europe/Berlin
-    - PYFUNCEBLE_CONFIG_DIR: "${TRAVIS_BUILD_DIR}/scripts/"
-    - PYFUNCEBLE_AUTO_CONFIGURATION: PyFunceble
-    - script_dir="${TRAVIS_BUILD_DIR}/scripts"
-    - testdir="${TRAVIS_BUILD_DIR}/test_data"
-    - testfile="${testdir}/typosquatting.mypdns.cloud.list"
-    - whitelist="${testdir}/whitelist.txt"
-    - tag=$(date '+%F %X %Z %z')
+    - bash scripts/variables.sh
+    #- PYFUNCEBLE_CONFIG_DIR: "${TRAVIS_BUILD_DIR}/scripts/"
+    #- PYFUNCEBLE_AUTO_CONFIGURATION: PyFunceble
+    
 
 addons:
   mariadb: '10.4'
