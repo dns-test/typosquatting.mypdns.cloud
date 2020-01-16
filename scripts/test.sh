@@ -44,8 +44,8 @@ MySqlExport () {
 # **********************
 # Setting date variables
 # **********************
-printf "\nSetting Variables\n"
-source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
+#printf "\nSetting Variables\n"
+#source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
 
 ##########################################
 # Make sure all directories are in place #

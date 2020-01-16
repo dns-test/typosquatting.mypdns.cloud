@@ -8,7 +8,7 @@
 # Please forward any additions, corrections or comments by logging an issue at
 # https://gitlab.com/my-privacy-dns/support/issues
 
-source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
+#source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
 
 printf "\n\tRunning Commit.sh\n"
 
