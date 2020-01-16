@@ -49,8 +49,8 @@ RunPyFunceble () {
         --ci-branch test-run \
         --ci-distribution-branch master \
         --commit-autosave-message "${tag}.${TRAVIS_BUILD_NUMBER} [Auto Saved]" \
-        --commit-results-message "${tag}.${TRAVIS_BUILD_NUMBER}"
-        --cmd "MySqlExport"
+        --commit-results-message "${tag}.${TRAVIS_BUILD_NUMBER}" \
+        --cmd "MySqlExport" \
          -f ${testfile}
 }
 
