@@ -50,7 +50,6 @@ RunPyFunceble () {
         --ci-distribution-branch master \
         --commit-autosave-message "${tag}.${TRAVIS_BUILD_NUMBER} [Auto Saved]" \
         --commit-results-message "${tag}.${TRAVIS_BUILD_NUMBER}" \
-        --cmd "sudo mysqldump --user=pyfunceble --password=pyfunceble --opt pyfunceble > ${HOME}/db/pyfunceble.sql" \
          -f "${testfile}"
 }
 
