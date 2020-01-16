@@ -40,12 +40,17 @@ printf "\nImporting AXFR\n"
 AXFRImport () {
 	truncate -s 0 "${testfile}"
 	
-    dig axfr typosquatting.mypdns.cloud @axfr.ipv4.mypdns.cloud -p 5353 | grep -F "CNAME" | grep -vE "(^(\*\.|$))" | sed 's/\.typosquatting\.mypdns\.cloud.*$//;s/^\s*\(.*[^ \t]\)\(\s\+\)*$/\1/' > "${testfile}"
+    dig axfr typosquatting.mypdns.cloud @axfr.ipv4.mypdns.cloud -p 5353 \
+		| grep -F "CNAME" | grep -vE "(^(\*\.|$))" \
+		| sed 's/\.typosquatting\.mypdns\.cloud.*$//;s/^\s*\(.*[^ \t]\)\(\s\+\)*$/\1/' \
+		> "${testfile}"
 
 	printf "\nImporting AXFR... DONE!\n"
 	exit ${?}
 }
 AXFRImport
+
+cat "${testfile}"
 
 #ImportWhiteList () {
 	#printf "\nImporting whitelist\n"

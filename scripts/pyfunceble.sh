@@ -21,8 +21,6 @@ source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
 # ******************
 #input="${testdir}/typosquatting.mypdns.cloud.list"
 
-cat "${testfile}"
-
 # **********************
 # Run PyFunceble Testing
 # **********************
