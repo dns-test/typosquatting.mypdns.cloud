@@ -13,40 +13,38 @@
 # **********************
 # Setting date variables
 # **********************
-printf "\nSetting Variables\n"
-source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
+#printf "\nSetting Variables\n"
+#source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
 
 # ******************
 # Database functions
 # ******************
 
-MySqlImport
-
-##########################################
-# Make sure all directories are in place #
-##########################################
-
-printf "\nMaking testdir...\n"
-
-if [ ! -d "${testdir}" ]
-then
-	mkdir -p "${testdir}"
-	ls -lha "${testdir}"
-fi
+#MySqlImport
+printf "\nMySql import...\n"
+	sudo mysql -u root -h localhost -e "CREATE DATABASE pyfunceble DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+	sudo mysql -u root -h localhost -e "CREATE USER 'root'@'%' IDENTIFIED BY ''"
+	sudo mysql -u root -h localhost -e "CREATE USER 'pyfunceble'@'localhost' IDENTIFIED BY 'pyfunceble';"
+	sudo mysql -u root -h localhost -e "GRANT ALL PRIVILEGES ON pyfunceble.* TO 'pyfunceble'@'localhost';"
+	if [ -f "${HOME}/db/pyfunceble.sql" ]
+	then
+		sudo mysql --user=pyfunceble --password=pyfunceble pyfunceble < "${HOME}/db/pyfunceble.sql"
+	fi
+printf "\nMySql Import DONE\n"
 
 # ***************
 # Import via AXFR
 # ***************
-printf "\nAXFR Importing\n"
+printf "\nImporting AXFR\n"
 
-#AXFRImport () {
+AXFRImport () {
 	truncate -s 0 "${testfile}"
 	
-    dig axfr typosquatting.mypdns.cloud @axfr.ipv4.mypdns.cloud -p 5353 grep -vE "(^(\*\.|$))|[SOA]" sed 's/\.rpz\.mypdns\.cloud.*$//;s/^\s*\(.*[^ \t]\)\(\s\+\)*$/\1/' > "${testfile}"
+    dig axfr typosquatting.mypdns.cloud @axfr.ipv4.mypdns.cloud -p 5353 | grep -F "CNAME" | grep -vE "(^(\*\.|$))" | sed 's/\.typosquatting\.mypdns\.cloud.*$//;s/^\s*\(.*[^ \t]\)\(\s\+\)*$/\1/' > "${testfile}"
 
-	printf "\nAXFR Importing... DONE!\n"
+	printf "\nImporting AXFR... DONE!\n"
 	exit ${?}
-#}
+}
 AXFRImport
 
 #ImportWhiteList () {

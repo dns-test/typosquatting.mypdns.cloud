@@ -27,6 +27,12 @@ env:
     - TZ: Europe/Berlin
     #- PYFUNCEBLE_CONFIG_DIR: "${TRAVIS_BUILD_DIR}/scripts/"
     #- PYFUNCEBLE_AUTO_CONFIGURATION: PyFunceble
+    - printf "\nSetting Variables\n"
+    - script_dir="${TRAVIS_BUILD_DIR}/scripts"
+    - testdir="${TRAVIS_BUILD_DIR}/test_data"
+    - testfile="${testdir}/typosquatting.mypdns.cloud.list"
+    - whitelist="${testdir}/whitelist.txt"
+    - tag=$(date '+%F %X %Z %z')
     
 
 addons:
