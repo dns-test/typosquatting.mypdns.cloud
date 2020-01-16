@@ -13,13 +13,15 @@
 # **********************
 # Setting date variables
 # **********************
-#source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
+source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
 #tag=$(date '+%F %X %Z %z')
 
 # ******************
 # Set our Input File
 # ******************
 #input="${testdir}/typosquatting.mypdns.cloud.list"
+
+cat "${tetfile}"
 
 # **********************
 # Run PyFunceble Testing

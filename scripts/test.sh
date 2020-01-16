@@ -10,20 +10,17 @@
 # Find PyFunceble at: https://github.com/funilrys/PyFunceble
 # ****************************************************************
 
+# **********************
+# Setting date variables
+# **********************
+printf "\nSetting Variables\n"
+source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
+
 # ******************
 # Database functions
 # ******************
 
-
 MySqlImport
-
-
-
-# **********************
-# Setting date variables
-# **********************
-#printf "\nSetting Variables\n"
-#source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
 
 ##########################################
 # Make sure all directories are in place #

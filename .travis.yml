@@ -25,7 +25,6 @@ env:
     - TRAVIS_REPO_SLUG: dns-test/typosquatting.mypdns.cloud
     #- GIT_BRANCH: master
     - TZ: Europe/Berlin
-    - bash scripts/variables.sh
     #- PYFUNCEBLE_CONFIG_DIR: "${TRAVIS_BUILD_DIR}/scripts/"
     #- PYFUNCEBLE_AUTO_CONFIGURATION: PyFunceble
     
