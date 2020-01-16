@@ -15,6 +15,7 @@
 # ******************
 
 MySqlImport () {
+	printf "\nMySql import...\n"
 	sudo mysql -u root -h localhost -e "CREATE DATABASE pyfunceble DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 	sudo mysql -u root -h localhost -e "CREATE USER 'root'@'%' IDENTIFIED BY ''"
 	sudo mysql -u root -h localhost -e "CREATE USER 'pyfunceble'@'localhost' IDENTIFIED BY 'pyfunceble';"
@@ -23,22 +24,27 @@ MySqlImport () {
 	then
 		sudo mysql --user=pyfunceble --password=pyfunceble pyfunceble < "${HOME}/db/pyfunceble.sql"
 	fi
+	
+	printf "\nMySql Import DONE!\n"
 
 	exit ${?}
 }
 MySqlImport
 
 MySqlExport () {
+	printf "\nMysql Export...\n"
 	if [ ! -d "${HOME}/db/" ]
 	then
 		sudo mkdir -p ${HOME}/db/
 	fi
 	sudo mysqldump --user=pyfunceble --password=pyfunceble --opt pyfunceble > ${HOME}/db/pyfunceble.sql
+	printf "\nMySql Export done...\n"
 }
 
 # **********************
 # Setting date variables
 # **********************
+printf "\nSetting Variables\n"
 export script_dir="${TRAVIS_BUILD_DIR}/scripts"
 export testdir="${TRAVIS_BUILD_DIR}/test_data"
 export testfile="${testdir}/typosquatting.mypdns.cloud.list"
@@ -49,9 +55,12 @@ export tag=$(date '+%F %X %Z %z')
 # Make sure all directories are in place #
 ##########################################
 
+printf "\nMaking testdir...\n"
+
 if [ ! -d "${testdir}" ]
 then
 	mkdir -p "${testdir}"
+	ls -lha "${testdir}"
 fi
 
 # ***************
@@ -94,34 +103,5 @@ AXFRImport
 #exit ${?}
 
 #bash "${script_dir}/pyfunceble.sh"
-
-RunPyFunceble () {
-
-    #tag=$(date '+%F %X %Z %z')
-    ulimit -u
-    cd ${script_dir}
-
-    hash PyFunceble
-
-    if [[ -f "${script_dir/}" ]]
-    then
-        rm "${script_dir}/.PyFunceble.yaml"
-        rm "${script_dir}/.PyFunceble_production.yaml"
-    fi
-
-    PyFunceble --version
-    PyFunceble --ci -q -ex --plain --idna -db -h --http \
-		--database-type mariadb -m -p 4 \
-        --hierarchical --cmd-before-end "bash ${TRAVIS_BUILD_DIR}/scripts/Commit.sh" \
-        --autosave-minutes 20 \
-        --ci-branch test-run \
-        --ci-distribution-branch master \
-        --commit-autosave-message "${tag}.${TRAVIS_BUILD_NUMBER} [Auto Saved]" \
-        --commit-results-message "${tag}.${TRAVIS_BUILD_NUMBER}"
-        --cmd "MySqlExport"
-         -f ${testfile}
-}
-
-RunPyFunceble
 
 exit ${?}
