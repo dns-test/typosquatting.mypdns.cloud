@@ -4,7 +4,7 @@ language: python
 
 python:
   - "3.7"
-  - "3.8"
+  #- "3.8"
   #- "3.8-dev"
   #- "3.9-dev"
 
@@ -12,7 +12,6 @@ cache:
   pip: true
   directories:
   - $HOME/db/
-  - ${TRAVIS_BUILD_DIR}/scripts/output/
 
 git:
   depth: 3
