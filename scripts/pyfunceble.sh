@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # **********************
 # Run PyFunceble Testing
 # **********************
@@ -13,7 +13,7 @@
 # **********************
 # Setting date variables
 # **********************
-
+source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
 #tag=$(date '+%F %X %Z %z')
 
 # ******************
@@ -51,7 +51,7 @@ RunPyFunceble () {
         --commit-autosave-message "${tag}.${TRAVIS_BUILD_NUMBER} [Auto Saved]" \
         --commit-results-message "${tag}.${TRAVIS_BUILD_NUMBER}" \
         --cmd "MySqlExport" \
-         -f ${testfile}
+         -f "${testfile}"
 }
 
 RunPyFunceble
