@@ -62,16 +62,14 @@ fi
 # ***************
 # Import via AXFR
 # ***************
+printf "\nAXFR Importing\n"
 
 AXFRImport () {
-	printf "\ntruncate ${testfile}\n"
 	truncate -s 0 "${testfile}"
-	printf "\nAXFR Importing\n"
-    dig axfr typosquatting.mypdns.cloud @axfr.ipv4.mypdns.cloud -p 5353 \
-		| grep -vE "(^(\*\.|$))|[SOA]" \
-		| sed 's/\.rpz\.mypdns\.cloud.*$//;s/^\s*\(.*[^ \t]\)\(\s\+\)*$/\1/' \
-		> "${testfile}"
+	
+    dig axfr typosquatting.mypdns.cloud @axfr.ipv4.mypdns.cloud -p 5353 grep -vE "(^(\*\.|$))|[SOA]" sed 's/\.rpz\.mypdns\.cloud.*$//;s/^\s*\(.*[^ \t]\)\(\s\+\)*$/\1/' > "${testfile}"
 
+	printf "\nAXFR Importing... DONE!\n"
 	exit ${?}
  }
 AXFRImport
