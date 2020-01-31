@@ -3,10 +3,7 @@ dist: bionic
 language: python
 
 python:
-  - "3.7"
-  #- "3.8"
-  #- "3.8-dev"
-  #- "3.9-dev"
+  - "3.8.1"
 
 cache:
   pip: true
@@ -18,21 +15,14 @@ git:
 
 env:
   global:
-    - secure: "u5uZXAbxR31QOJ67fXo6tNIKDB50f6NWnqHS8AISo+fDawjYLrP0fkZcR2/WeIppNJwE4sut4eNPUc9cOx/vhn+joGjHaxG2Z0+WV0UWKAMil71b/qci2MUCNpwTT2Gi4Zk16EwyXa2rwZlCDnnPZE/gvCZiHBPCtlHYi7UlZ5iiqIrxAYLxV/ZmtUoWNuQuDwboXOhT6HIx10eZD5bm6jZpwzEzHDN0pZ07k7LeELzSR5EbQTHN1oBnraHrz/uuusM16QRbJyNLUSZ3PtXJw+fm7qd3tJ5nNDAap3GnHivq6isq9AUfMxOYZEV0dBwa/zyaFucPGsv4MmgJNmHK5CQXiJ3nVD8SJjiZbAuZuUaj+J6GB54YezeflzlJc3DG59U8CEjyjpjvGP7hii9DUiHd8Q4jxtuxFP2Vi5iUgFl/905OSt3IPBn6y34H9/sm99anDDcBsjQkpCMdS4ZIkCqCasFV1hH7vsCBhUl+lbMWimyqm++dGAUbFdC0wOCX4UF+gHHsgAm/850+ZT97hTNEzM7xedMQqyXiuYg8H+pH/EhtTVwKwUpYpo6mmrqwWnuFZGlIW8hY3ldljhKmPwBnS5Q5liZzOyJacLXMbQuYbqvlHhGuzh8DvA8JNhbLKlw4XjEq+Ieqk0qApAJhfCAsVZpBwhLO+G/XYbqfLKA="
     - GIT_NAME: "Spirillen"
     - GIT_EMAIL: 44526987+spirillen@users.noreply.github.com
     - TRAVIS_REPO_SLUG: dns-test/typosquatting.mypdns.cloud
     #- GIT_BRANCH: master
-    - TZ: Europe/Berlin
+    - TZ: UTC #Europe/Berlin
+    - PYFUNCEBLE_AUTO_CONFIGURATION: YES
     #- PYFUNCEBLE_CONFIG_DIR: "${TRAVIS_BUILD_DIR}/scripts/"
     #- PYFUNCEBLE_AUTO_CONFIGURATION: PyFunceble
-    - printf "\nSetting Variables\n"
-    - script_dir="${TRAVIS_BUILD_DIR}/scripts"
-    - testdir="${TRAVIS_BUILD_DIR}/test_data"
-    - testfile="${testdir}/typosquatting.mypdns.cloud.list"
-    - whitelist="${testdir}/whitelist.txt"
-    - tag=$(date '+%F %X %Z %z')
-    
 
 addons:
   mariadb: '10.4'
@@ -46,7 +36,7 @@ addons:
   
 install:
   - pip3 install --upgrade pip
-  - pip3 install pyfunceble-dev==2.53.6
+  - pip3 install pyfunceble-dev==2.57.1
   #- pip3 install git+https://github.com/funilrys/PyFunceble.git@dev
   #- pip3 install ultimate-hosts-blacklist-whitelist
 
