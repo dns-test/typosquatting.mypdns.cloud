@@ -46,7 +46,7 @@ RunPyFunceble () {
 	--database-type mariadb -m -p $(nproc --ignore=1) \
         --hierarchical --cmd-before-end "bash ${TRAVIS_BUILD_DIR}/scripts/commit.sh" \
         --autosave-minutes 20 \
-        --ci-branch test-run \
+        --ci-branch master \
         --ci-distribution-branch master \
         --commit-autosave-message "${tag}.${TRAVIS_BUILD_NUMBER} [Auto Saved]" \
         --commit-results-message "${tag}.${TRAVIS_BUILD_NUMBER}" \
