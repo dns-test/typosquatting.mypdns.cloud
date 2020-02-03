@@ -10,6 +10,7 @@
 
 source ${TRAVIS_BUILD_DIR}/scripts/variables.sh
 
+
 printf "\n\tRunning Commit.sh\n"
 
 if [ -f "${script_dir}/output/domains/INACTIVE/list" ]
