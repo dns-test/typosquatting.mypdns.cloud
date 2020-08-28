@@ -39,6 +39,7 @@ addons:
     - msttcorefonts
     - lsof
     - pdns-recursor
+    - ldnsutils
     update: true
   
 install:
