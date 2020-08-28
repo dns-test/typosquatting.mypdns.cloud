@@ -43,7 +43,7 @@ RunPyFunceble () {
 
     PyFunceble --version
     PyFunceble --ci -q -ex --plain --idna -db -h --http \
-      --database-type mariadb -m -p $(nproc --ignore=1) \
+      --database-type mariadb -m \
       --hierarchical --cmd-before-end "bash ${TRAVIS_BUILD_DIR}/scripts/commit.sh" \
       --autosave-minutes 20 \
       --ci-branch master \
@@ -56,3 +56,5 @@ RunPyFunceble () {
 RunPyFunceble
 
 exit ${?}
+
+#  -p $(nproc --ignore=1)
